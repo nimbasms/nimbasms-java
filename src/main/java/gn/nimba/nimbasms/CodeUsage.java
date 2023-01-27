@@ -14,7 +14,7 @@ import java.util.List;
 public class CodeUsage {
 
 	public static void main(String[] args) throws IOException {
-		NimbaSmsClient client = new NimbaSmsClient("XXXX", "XXXX");
+		NimbaSMSClient client = new NimbaSMSClient("XXXX", "XXXX");
 
 		AccountResponse accountResponse = client.getAccount().get();
 		System.out.println(accountResponse);

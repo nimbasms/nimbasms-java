@@ -6,7 +6,7 @@ First, instantiate the client using your API key:
 
 ```java
 
-NimbaSmsClient client = new NimbaSmsClient("ACCOUNT_SID", "AUTH_TOKEN")
+NimbaSMSClient client = new NimbaSMSClient("ACCOUNT_SID", "AUTH_TOKEN")
 ```
 
 ## Accounts

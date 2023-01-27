@@ -12,7 +12,7 @@ import gn.nimba.nimbasms.sendernames.SenderName;
 import gn.nimba.nimbasms.sendernames.SenderNameImpl;
 import okhttp3.Credentials;
 
-public class NimbaSmsClient {
+public class NimbaSMSClient {
     private final String token;
 
     private final Account account;
@@ -21,7 +21,7 @@ public class NimbaSmsClient {
     private final SenderName senderName;
     private final Message message;
 
-    public NimbaSmsClient(String username, String password) {
+    public NimbaSMSClient(String username, String password) {
         token = Credentials.basic(username, password);
         account = new AccountImpl(this);
         contact = new ContactImpl(this);
