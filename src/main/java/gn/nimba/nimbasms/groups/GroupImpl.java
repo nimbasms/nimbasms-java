@@ -1,14 +1,14 @@
 package gn.nimba.nimbasms.groups;
 
 import gn.nimba.nimbasms.common.ApiBase;
-import gn.nimba.nimbasms.NimbaSmsClient;
+import gn.nimba.nimbasms.NimbaSMSClient;
 import gn.nimba.nimbasms.common.RootResult;
 import gn.nimba.nimbasms.common.UriType;
 
 import java.io.IOException;
 
 public class GroupImpl extends ApiBase implements Group {
-    public GroupImpl(NimbaSmsClient root) {
+    public GroupImpl(NimbaSMSClient root) {
         super(root);
     }
 

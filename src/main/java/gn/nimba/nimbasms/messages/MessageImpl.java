@@ -1,7 +1,7 @@
 package gn.nimba.nimbasms.messages;
 
 import gn.nimba.nimbasms.common.ApiBase;
-import gn.nimba.nimbasms.NimbaSmsClient;
+import gn.nimba.nimbasms.NimbaSMSClient;
 import gn.nimba.nimbasms.common.RootResult;
 import gn.nimba.nimbasms.common.UriType;
 
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class MessageImpl extends ApiBase implements Message {
-    public MessageImpl(NimbaSmsClient root) {
+    public MessageImpl(NimbaSMSClient root) {
         super(root);
     }
 

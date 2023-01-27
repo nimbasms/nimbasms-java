@@ -1,14 +1,14 @@
 package gn.nimba.nimbasms.sendernames;
 
 import gn.nimba.nimbasms.common.ApiBase;
-import gn.nimba.nimbasms.NimbaSmsClient;
+import gn.nimba.nimbasms.NimbaSMSClient;
 import gn.nimba.nimbasms.common.RootResult;
 import gn.nimba.nimbasms.common.UriType;
 
 import java.io.IOException;
 
 public class SenderNameImpl extends ApiBase implements SenderName {
-    public SenderNameImpl(NimbaSmsClient root) {
+    public SenderNameImpl(NimbaSMSClient root) {
         super(root);
     }
 

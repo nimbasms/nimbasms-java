@@ -1,6 +1,6 @@
 package gn.nimba.nimbasms.common;
 
-import gn.nimba.nimbasms.NimbaSmsClient;
+import gn.nimba.nimbasms.NimbaSMSClient;
 import gn.nimba.nimbasms.common.UriType;
 import gn.nimba.nimbasms.exception.NimbaSmsException;
 import okhttp3.*;
@@ -20,9 +20,9 @@ public class ApiBase {
     private static final String AUTHORIZATION = "AUTHORIZATION";
 
     protected static final String BASE_URL = "https://api.nimbasms.com/v1/";
-    protected NimbaSmsClient root;
+    protected NimbaSMSClient root;
 
-    public ApiBase(NimbaSmsClient root) {
+    public ApiBase(NimbaSMSClient root) {
         this.root = root;
     }
 
