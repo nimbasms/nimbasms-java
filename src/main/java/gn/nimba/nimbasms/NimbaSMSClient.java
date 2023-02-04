@@ -21,8 +21,8 @@ public class NimbaSMSClient {
     private final SenderName senderName;
     private final Message message;
 
-    public NimbaSMSClient(String username, String password) {
-        token = Credentials.basic(username, password);
+    public NimbaSMSClient(String serviceId, String secretToken) {
+        token = Credentials.basic(serviceId, secretToken);
         account = new AccountImpl(this);
         contact = new ContactImpl(this);
         group = new GroupImpl(this);

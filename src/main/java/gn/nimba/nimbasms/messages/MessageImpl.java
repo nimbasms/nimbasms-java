@@ -14,19 +14,40 @@ public class MessageImpl extends ApiBase implements Message {
     }
 
     @Override
+    public String toString() {
+        return "<Nimba.Message>";
+    }
+
+    @Override
+    public RootResult<MessageResponse> next() throws IOException {
+        if (this.next == null) {
+            return null;
+        }
+        return this.requestMessage(this.next, null);
+    }
+
+    @Override
+    public RootResult<MessageResponse>  previous() throws IOException {
+        if (this.previous == null) {
+            return null;
+        }
+        return this.requestMessage(this.previous, null);
+    }
+
+    @Override
     public RootResult<MessageResponse> list() throws IOException {
-        return executeGet(UriType.MESSAGES, null, null, RootResult.class);
+        return this.requestMessage(BASE_URL + UriType.MESSAGES.getPath(), null);
+
     }
 
     @Override
     public RootResult<MessageResponse> list(Integer limit, Integer offset) throws IOException {
-        return executeGet(UriType.MESSAGES, createPaginationQueryParams(limit, offset), null, RootResult.class);
-
+        return this.requestMessage(BASE_URL + UriType.MESSAGES.getPath(), createPaginationQueryParams(limit, offset));
     }
 
     @Override
     public MessageResponse create(String senderName, List<String> to, String message) throws IOException {
-        MessageRequest messageRequest= MessageRequest.builder()
+        MessageRequest messageRequest = MessageRequest.builder()
                 .senderName(senderName)
                 .to(to)
                 .message(message)
@@ -37,6 +58,6 @@ public class MessageImpl extends ApiBase implements Message {
 
     @Override
     public MessageDetails retrieve(String messageId) throws IOException {
-        return executeGet(UriType.MESSAGES,null, List.of(messageId), MessageDetails.class);
+        return executeGet(UriType.MESSAGES, List.of(messageId), MessageDetails.class);
     }
 }

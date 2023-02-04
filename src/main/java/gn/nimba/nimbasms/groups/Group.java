@@ -1,10 +1,6 @@
 package gn.nimba.nimbasms.groups;
 
-import gn.nimba.nimbasms.common.RootResult;
+import gn.nimba.nimbasms.common.Pageable;
 
-import java.io.IOException;
-
-public interface Group {
-    RootResult<GroupResponse> list() throws IOException;
-    RootResult<GroupResponse> list(Integer limit, Integer offset) throws IOException;
+public interface Group extends Pageable<GroupResponse> {
 }

@@ -9,18 +9,38 @@ import java.io.IOException;
 import java.util.List;
 
 public class ContactImpl extends ApiBase implements Contact {
-    public ContactImpl(NimbaSMSClient root) {
-        super(root);
+    public ContactImpl(NimbaSMSClient client) {
+        super(client);
+    }
+
+    @Override
+    public String toString() {
+        return "<Nimba.Contact>";
+    }
+    @Override
+    public RootResult<ContactResponse> next() throws IOException {
+        if (this.next == null) {
+            return null;
+        }
+        return this.requestMessage(this.next, null);
+    }
+
+    @Override
+    public RootResult<ContactResponse>  previous() throws IOException {
+        if (this.previous == null) {
+            return null;
+        }
+        return this.requestMessage(this.previous, null);
     }
 
     @Override
     public RootResult<ContactResponse> list() throws IOException {
-        return executeGet(UriType.CONTACTS, null, null, RootResult.class);
+        return this.requestMessage(BASE_URL + UriType.CONTACTS.getPath(), null);
     }
 
     @Override
     public RootResult<ContactResponse> list(Integer limit, Integer offset) throws IOException {
-        return executeGet(UriType.CONTACTS, createPaginationQueryParams(limit, offset), null, RootResult.class);
+        return this.requestMessage(BASE_URL + UriType.CONTACTS.getPath(), createPaginationQueryParams(limit, offset));
     }
 
     @Override
