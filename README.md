@@ -58,3 +58,25 @@ You can also retrieve the last 10 Group by passing in the limit and offset:
 RootResult<GroupResponse> last10groups = client.getGroup().list(10, 1);
 System.out.println(last10groups);
 ```
+## Message
+Get All messages
+```java
+RootResult<MessageResponse> messages = client.getMessage().list();
+System.out.println(messages);
+```
+Get only last 10 messages
+```java
+RootResult<MessageResponse> last10Messages = client.getMessage().list(10, 1);
+System.out.println(last10Messages);
+```
+Send a Message
+```java
+MessageResponse messageResponse = client.getMessage().create("sender_name", List.of("+224XXXXXXXXX"), "Hello nimba");
+System.out.println(messageResponse);
+```
+Retrieve message
+```java
+MessageDetails messageDetails = client.getMessage().retrieve("123");
+System.out.println(messageDetails);
+```
+
