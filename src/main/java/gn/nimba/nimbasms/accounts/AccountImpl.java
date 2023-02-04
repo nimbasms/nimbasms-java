@@ -12,7 +12,12 @@ public class AccountImpl extends ApiBase implements Account {
     }
 
     @Override
+    public String toString() {
+        return "<Nimba.Account>";
+    }
+
+    @Override
     public AccountResponse get() throws IOException {
-        return executeGet(UriType.ACCOUNTS, null, null, AccountResponse.class);
+        return executeGet(UriType.ACCOUNTS, null, AccountResponse.class);
     }
 }

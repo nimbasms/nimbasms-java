@@ -1,7 +1,6 @@
 package gn.nimba.nimbasms.common;
 
 import gn.nimba.nimbasms.NimbaSMSClient;
-import gn.nimba.nimbasms.common.UriType;
 import gn.nimba.nimbasms.exception.NimbaSmsException;
 import okhttp3.*;
 
@@ -20,16 +19,40 @@ public class ApiBase {
     private static final String AUTHORIZATION = "AUTHORIZATION";
 
     protected static final String BASE_URL = "https://api.nimbasms.com/v1/";
+
+    protected String next;
+    protected String previous;
+    protected int count;
     protected NimbaSMSClient root;
 
     public ApiBase(NimbaSMSClient root) {
         this.root = root;
+        this.next = null;
+        this.previous = null;
+        this.count = 0;
     }
 
-    protected  <T> T executeGet(UriType uriType, Map<String, String> queryParams, List<String> pathParams, Class<T> clazz) throws IOException {
+    protected <T> RootResult<T> requestMessage(String uri, Map<String, String> params) throws IOException {
+        RootResult<T> response = executeGet(uri, params);
+        if (Objects.nonNull(response)) {
+            this.next = response.getNext();
+            this.previous = response.getPrevious();
+            this.count = response.getCount();
+        }
+        return response;
+    }
+    private <T> T executeGet(String uri, Map<String, String> queryParams) throws IOException {
         Request request = new Request.Builder()
                 .headers(createAuthHeaders(root.getToken()))
-                .url(buildUrl(BASE_URL.concat(uriType.getPath()),queryParams, pathParams))
+                .url(buildUrl(uri ,queryParams, null))
+                .build();
+
+        return fetchObject(request, (Class<T>) RootResult.class);
+    }
+    protected  <T> T executeGet(UriType uriType, List<String> pathParams, Class<T> clazz) throws IOException {
+        Request request = new Request.Builder()
+                .headers(createAuthHeaders(root.getToken()))
+                .url(buildUrl(BASE_URL.concat(uriType.getPath()), null, pathParams))
                 .build();
 
         return fetchObject(request, clazz);
@@ -61,7 +84,7 @@ public class ApiBase {
      */
     private void handleErrorResponse(Response response) throws IOException {
         if (!response.isSuccessful()) {
-            throw new NimbaSmsException(response.body().string());
+            throw new NimbaSmsException(Objects.requireNonNull(response.body()).string());
         }
     }
 
@@ -112,7 +135,7 @@ public class ApiBase {
         if (limit == null || limit < 0) {
             throw new NimbaSmsException("Limit must be a positive Integer");
         }
-        if (offset < 1) {
+        if (offset == null || offset < 0) {
             throw new NimbaSmsException("Offset must be greater than 1");
         }
     }

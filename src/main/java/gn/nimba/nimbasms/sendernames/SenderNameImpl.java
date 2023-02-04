@@ -13,12 +13,32 @@ public class SenderNameImpl extends ApiBase implements SenderName {
     }
 
     @Override
+    public String toString() {
+        return "<Nimba.SenderName>";
+    }
+
+    @Override
+    public RootResult<SenderNameResponse> next() throws IOException {
+        if (this.next == null) {
+            return null;
+        }
+        return this.requestMessage(this.next, null);
+    }
+
+    @Override
+    public RootResult<SenderNameResponse> previous() throws IOException {
+        if (this.previous == null) {
+            return null;
+        }
+        return this.requestMessage(this.previous, null);
+    }
+    @Override
     public RootResult<SenderNameResponse> list() throws IOException {
-        return executeGet(UriType.SENDER_NAMES, null, null, RootResult.class);
+        return this.requestMessage(BASE_URL + UriType.SENDER_NAMES.getPath(), null);
     }
 
     @Override
     public RootResult<SenderNameResponse> list(Integer limit, Integer offset) throws IOException {
-        return executeGet(UriType.SENDER_NAMES, createPaginationQueryParams(limit, offset), null, RootResult.class);
+        return this.requestMessage(BASE_URL + UriType.SENDER_NAMES.getPath(), createPaginationQueryParams(limit, offset));
     }
 }
