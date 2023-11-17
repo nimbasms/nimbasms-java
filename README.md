@@ -26,10 +26,20 @@ If you use Maven, add the following configuration to your project's `pom.xml`
   <version>0.0.1</version>
 </dependency>
 ```
+## Configuration of Credentials
+
+Before instantiating a `NimbaSMSClient` object, ensure you have the required credentials. Obtain these credentials (ACCOUNT_SID and AUTH_TOKEN) from your SMS service provider.
+
+```java
+String ACCOUNT_SID = "Your_ACCOUNT_SID";
+String AUTH_TOKEN = "Your_AUTH_TOKEN";
+```
+
 ## <a name="accesToken"></a> Get your Access token
 ```java
+import com.nimbasms.nimbasms.NimbaSMSClient;
 
-NimbaSMSClient client = new NimbaSMSClient("ACCOUNT_SID", "AUTH_TOKEN")
+NimbaSMSClient client = new NimbaSMSClient(ACCOUNT_SID, AUTH_TOKEN)
 ```
 
 ## <a name="account"></a> Accounts
