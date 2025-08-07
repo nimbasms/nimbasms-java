@@ -1,6 +1,7 @@
 package com.nimbasms.nimbasms.accounts;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor

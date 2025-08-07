@@ -4,9 +4,11 @@ import com.nimbasms.nimbasms.contacts.ContactResponse;
 import com.nimbasms.nimbasms.accounts.AccountResponse;
 import com.nimbasms.nimbasms.contacts.ContactDto;
 import com.nimbasms.nimbasms.groups.GroupResponse;
+import com.nimbasms.nimbasms.messages.MessageDto;
 import com.nimbasms.nimbasms.messages.MessageResponse;
 import com.nimbasms.nimbasms.messages.MessageDetailsResponse;
 
+import com.nimbasms.nimbasms.purchase.PurchaseResponse;
 import com.nimbasms.nimbasms.sendernames.SenderNameResponse;
 import java.io.IOException;
 import java.util.List;
@@ -58,13 +60,17 @@ public class CodeUsage {
 		System.out.println(contactResponseWithGroupsAndName);
 
 		//create message...
-		MessageResponse messageResponse = client.getMessage().create("Nimba API", List.of("+224XXXXXXXXX"), "Hello test");
+		MessageDto messageResponse = client.getMessage().create("Nimba API", List.of("+224XXXXXXXXX"), "Hello test");
 		System.out.println(messageResponse);
 
 		// Create Contact
 		//This contact will be added to the default contact list
 		ContactDto defaultContactResponse = client.getContact().create("+224XXXXXXXXX", null, null);
 		System.out.println(defaultContactResponse);
+
+		// fetch purchase histories
+		PurchaseResponse response = client.getPurchase().list();
+		System.out.println(response);
 
 	}
 

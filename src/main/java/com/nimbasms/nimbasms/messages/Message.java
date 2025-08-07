@@ -27,14 +27,14 @@ public class Message extends ApiImplBase<MessageResponse> {
         return "<Nimba.Message>";
     }
 
-    public MessageResponse create(String senderName, List<String> to, String message) throws IOException {
+    public MessageDto create(String senderName, List<String> to, String message) throws IOException {
         MessageRequest messageRequest = MessageRequest.builder()
                 .senderName(senderName)
                 .to(to)
                 .message(message)
                 .build();
 
-        return executePost(UriType.MESSAGES, messageRequest, MessageResponse.class);
+        return executePost(UriType.MESSAGES, messageRequest, MessageDto.class);
     }
 
     public MessageDetailsResponse retrieve(String messageId) throws IOException {

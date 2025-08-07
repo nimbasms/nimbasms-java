@@ -4,9 +4,12 @@ import com.nimbasms.nimbasms.accounts.Account;
 import com.nimbasms.nimbasms.contacts.Contact;
 import com.nimbasms.nimbasms.groups.Group;
 import com.nimbasms.nimbasms.messages.Message;
+import com.nimbasms.nimbasms.purchase.Purchase;
 import com.nimbasms.nimbasms.sendernames.SenderName;
+import lombok.Getter;
 import okhttp3.Credentials;
 
+@Getter
 public class NimbaSMSClient {
     private final String token;
 
@@ -15,7 +18,7 @@ public class NimbaSMSClient {
     private final Group group;
     private final SenderName senderName;
     private final Message message;
-
+    private final Purchase purchase;
     public NimbaSMSClient(String serviceId, String secretToken) {
         token = Credentials.basic(serviceId, secretToken);
         account = new Account(this);
@@ -23,29 +26,6 @@ public class NimbaSMSClient {
         group = new Group(this);
         senderName = new SenderName(this);
         message = new Message(this);
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public Contact getContact() {
-        return contact;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public SenderName getSenderName() {
-        return senderName;
-    }
-
-    public Message getMessage() {
-        return message;
+        purchase = new Purchase(this);
     }
 }
