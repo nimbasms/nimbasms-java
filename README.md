@@ -1,22 +1,37 @@
 # nimbasms-java
-A Java module for communicating with Nimba SMS API. 
 
-## Usage
-First, instantiate the client using your API key:
+A Java module for communicating with the **Nimba SMS API**.
+
+[![](https://jitpack.io/v/nimbasms/nimbasms-java.svg)](https://jitpack.io/#nimbasms/nimbasms-java)
+
+---
+
+## Table of Contents
 
 - [Installation](#installation)
-- [Get your Access token](#accesToken)
-- [Accounts](#account)
-- [Groups](#group)
-- [Sendernames](#sendername)
-- [Contacts](#contact)
-- [Message](#message)
+- [JitPack Setup](#jitpack-setup)
+- [Credentials Setup](#credentials-setup)
+- [Usage](#usage)
+    - [Access Token](#access-token)
+    - [Accounts](#accounts)
+    - [Groups](#groups)
+    - [Sender Names](#sender-names)
+    - [Contacts](#contacts)
+    - [Messages](#messages)
+    - [Purchases](#purchases)
+
+---
+
 ## <a name="installation"></a> Installation
 
 ### System Requirements
 - JDK 11 or higher.
 - subscription via Nimba SMS Partner portal
 
+- Java 11 or higher
+- Subscription via [Nimba SMS Partner Portal](https:///www.nimbasms.com)
+
+### Maven (Default - Maven Central)
 ### Add Maven Dependency
 If you use Maven, add the following configuration to your project's `pom.xml`
 ```maven
@@ -24,6 +39,36 @@ If you use Maven, add the following configuration to your project's `pom.xml`
   <groupId>com.nimbasms</groupId>
   <artifactId>nimbasms</artifactId>
   <version>0.0.1</version>
+</dependency>
+```
+## <a name="jitpack-setup"></a> JitPack Setup
+> ⚠️ If the package is not yet on Maven Central, you can use JitPack
+
+```xml
+<repositories>
+  <repository>
+  <id>jitpack.io</id>
+  <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+```
+### Add Dependency
+Using the latest release tag (recommended):
+
+```xml
+<dependency>
+    <groupId>com.github.nimbasms</groupId>
+    <artifactId>nimbasms-java</artifactId>
+    <version>v0.0.1</version> <!-- Replace with the latest tag -->
+</dependency>
+```
+If no release exists:
+
+```xml
+<dependency>
+    <groupId>com.github.nimbasms</groupId>
+    <artifactId>nimbasms-java</artifactId>
+    <version>master-SNAPSHOT</version> <!-- Or use commit hash -->
 </dependency>
 ```
 ## Configuration of Credentials
@@ -170,3 +215,33 @@ MessageDetails messageDetails = client.getMessage().retrieve("123");
 System.out.println(messageDetails);
 ```
 
+## <a name="purchase"></a> Purchases
+List all purchases
+```java
+PurchaseResponse purchases = client.getPurchase().list();
+```
+Retrieve the last 10 purchases
+```java
+PurchaseResponse last10Purchases = client.getPurchase().list(10, 1);
+```
+The next method returns the next item in a list.
+```java
+PurchaseResponse nextPurchases = client.getPurchase().next();
+```
+The previous method returns the previous item in a list.
+```java
+PurchaseResponse previousPurchases = client.getPurchase().previous();
+```
+---
+
+## License
+
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Author & Contributions
+
+Contributions to the official Java client for [Nimba SMS](https://nimbasms.com)
+
+> 💡 Feel free to open issues or pull requests to improve the SDK.

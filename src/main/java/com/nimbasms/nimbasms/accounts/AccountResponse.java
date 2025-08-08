@@ -1,7 +1,9 @@
 package com.nimbasms.nimbasms.accounts;
 
-import lombok.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 @Data
